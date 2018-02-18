@@ -1,0 +1,76 @@
+@mixin warning {
+    background-color: orange;
+    color: white;
+
+    &:hover {
+        background-color: lighten($color: orange, $amount: 30%);
+    }
+}
+
+@mixin large-text {
+    font: {
+        size: 22px;
+        weight: bold;
+    }
+}
+
+@mixin rounded($radious: 5px){
+    border-radius: $radious;
+}
+
+@mixin box ($radious: 6px, $border: 1px solid #fff){
+    @include rounded($radious);
+    border: 1px solid #fff;
+}
+
+@mixin fancy-links {
+    a {
+        text-decoration: none;
+        font-style: italic;
+    }
+}
+
+@mixin box-shadow($shadows...){
+    box-shadow: $shadows;
+    -moz-box-shadow: $shadows;
+    -webkit-box-shadow: $shadows;
+}
+
+@mixin google-font($font){
+    $font: unquote($font);
+    @import url(https://fonts.googleapis.com/css?family=#{$font});
+}
+
+@mixin tiny-screens {
+    @media only screen and (max-width: 320px) {
+        @content;
+    }
+}
+
+@mixin small-screens {
+    @media only screen and (max-width: 480px) {
+        @content;
+    }
+}
+@mixin medium-screens {
+    @media only screen and (max-width: 680px) {
+        @content;
+    }
+}
+@mixin large-screens {
+    @media only screen and (max-width: 960px) {
+        @content;
+    }
+}
+
+@mixin adidas {
+    @if $brand == adidas {
+        @content;
+    }
+}
+
+@mixin nike {
+    @if $brand == nike {
+        @content;
+    }
+}

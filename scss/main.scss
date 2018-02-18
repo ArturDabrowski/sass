@@ -1,0 +1,155 @@
+@import 'partials/functions';
+@import 'partials/variables';
+@import 'partials/mixins';
+
+@include google-font("Alegreya+Sans");
+@include google-font("Titillium+Web");
+
+@for $i from 1 through 6 {
+    .col-#{$i}{
+        width: $i*2em;
+    }
+}
+
+$j: 2;
+@while $j <= 8 {
+    .picture-#{$j}{
+        width: $j*10%;
+    }
+    $j: $j+2;
+}
+
+
+$font-sizes: (tiny: 8px, small: 11px, medium: 13px, large: 18px);
+@each $name, $size in $font-sizes {
+    .#{$name} {
+        font-size: $size;
+    }
+}
+
+
+.warning-button {
+    @include warning;
+}
+
+.cta-button {
+    @extend .warning-button;
+    @extend .foo !optional;
+    @include rounded;
+    font-weight: bold;
+}
+
+.super-cta-button {
+    @extend .cta-button;
+    font-size: em(20px);
+}
+
+@include fancy-links;
+
+$contrast: normal;
+body {
+    font-family: $text-font;
+    height: 100%;
+    font-size: em(18px);
+    background-color: $body-background-color;
+
+    @if($contrast==high){
+        color: #999;
+    } @else if ($contrast==low){
+        color: #000;
+    } @else {
+        color: $text-color;
+    }
+
+    @include large-screens {
+        font-size: 125%;
+    }
+}
+
+h1, h2, h3, h4 {
+    font-family: $headline-font;
+}
+h2 {
+    @include large-text;
+}
+
+p {
+    font-family: $text-font;
+}
+ 
+a {
+    color: $link-color;
+
+    &:hover {
+        color: darken($link-color, $amount: 15%);
+    }
+    @include nike {
+        color: #223a50;
+    }
+}
+
+#header {
+    @include box($border: 1px solid black, $radious: 10px);
+    @include box-shadow(2px 0px 4px #999, 3px 2px #223a50);
+    
+    height: $header-height;
+    background-color: $theme-color;
+    font-family: 'Lato';
+
+    #main-menu {
+        li {
+            display: inline;
+        }
+        a {
+            color: $menu-item-color;
+            padding: 6px 8px;
+            border-bottom: 1px solid transparentize($color: #fefefe, $amount: 1);
+            transition: border-bottom 0.5s;
+            transition-timing-function: ease-in-out;
+
+            &:hover {
+                border-bottom: 1px solid opacify($color: #fefefe, $amount: .5);
+            }
+        }
+    }
+}
+
+#main {
+    width: $content-width;
+    margin-left: auto;
+    margin-right: auto;
+
+
+    @include large-screens {
+        width: auto;
+        max-width: $content-width;
+    }
+}
+
+
+#content {
+    float: left;
+    width: 6*$col;
+}
+
+#sidebar {
+    float: right;
+    width: 2*$col;
+
+    li {
+        padding: em(16px) em(20px);
+        border-bottom: 1px dashed #000;
+        list-style: none;
+
+        &:hover {
+            background-color: $hover-background-color;
+        }
+    }
+}
+
+#footer {
+    clear: both;
+    height: $footer-height;
+    background-color: $ternary-color;
+}
+
